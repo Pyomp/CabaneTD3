@@ -1,0 +1,13 @@
+<svg width="128px" height="128px" version="1.1" viewBox="0 0 128 128"
+    xmlns="http://www.w3.org/2000/svg"
+    xmlns:xlink="http://www.w3.org/1999/xlink">
+    <radialGradient id="sparka" cx="50" cy="50" r="50"
+        gradientUnits="userSpaceOnUse">
+        <stop stop-color="#fff" offset="0" />
+        <stop stop-color="#fff" stop-opacity=".5" offset=".25" />
+        <stop stop-color="#fff" stop-opacity=".25" offset=".5" />
+        <stop stop-color="#fff" stop-opacity=".1" offset=".75" />
+        <stop stop-color="#fff" stop-opacity="0" offset="1" />
+    </radialGradient>
+    <circle cx="50" cy="50" r="50" fill="url(#sparka)"/>
+</svg>

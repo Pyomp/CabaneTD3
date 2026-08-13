@@ -1,0 +1,28 @@
+{
+    "compilerOptions": {
+        "module": "es6",
+        "target": "es6",
+        "moduleResolution": "Node",
+        // "checkJs": true,
+        // "experimentalDecorators": true,
+        "alwaysStrict": true,
+        "baseUrl": "./",
+        "disableSizeLimit": true,
+        // "forceConsistentCasingInFileNames": true,
+        //"paths": {}
+        "pretty": true,
+        "rootDir": "./"
+    },
+    // "files": [
+    //     "./jsdoc.js"
+    // ],
+    "include": [
+        "./**/*.js",
+        "./presentation/utils/Loop_Manager.js"
+    ],
+    "exclude": [
+        "build",
+        "builder",
+        "node_modules",
+    ]
+}

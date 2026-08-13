@@ -1,0 +1,48 @@
+import { Box3, Sphere, Vector3 } from '../../../../client/3D/modules/three.module.js'
+import { mobs_design } from "../../../../game_design/entities/mobs_design.js"
+import { Evo_Bonus_Manager } from "../../../systems/Evo_Bonus_Managers.js"
+import { Loop_Manager } from "../../../systems/Loop_Manager.js"
+import { Max_Hp_Manager } from "../../../systems/Max_Hp_Manager.js"
+import { Physics } from "../../../Physics.js"
+import { User_Data } from "../../../user_data/User_Data.js"
+import { Enemy_Abstract } from "../models/Enemy_Abstract.js"
+
+const bounding_box = new Box3(new Vector3(-1, 0, -1), new Vector3(1, 1, 1))
+const bounding_sphere = new Sphere(new Vector3(0, .5, 0), .5)
+export class Bonhomme extends Enemy_Abstract {
+    /**
+     * @param {Vector3} pos
+     * @param {Max_Hp_Manager} max_hp_manager 
+     * @param {Loop_Manager} loop_manager
+     * @param {Physics} physics
+     * @param {User_Data} user_data
+     * @param {Enemy_Manager} enemy_manager 
+     * @param {Evo_Bonus_Manager} evo_bonus_manager 
+     */
+    constructor(
+        pos,
+        max_hp_manager,
+        loop_manager,
+        physics,
+        user_data,
+        enemy_manager,
+        evo_bonus_manager,
+    ) {
+
+        super(
+            pos,
+            mobs_design.bonhomme,
+            max_hp_manager.bonhomme,
+            loop_manager,
+            physics,
+            user_data,
+            enemy_manager,
+            evo_bonus_manager,
+        )
+
+        this.bounding_box = bounding_box
+        this.bounding_sphere = bounding_sphere
+
+        Bonhomme.on_create?.(this)
+    }
+}

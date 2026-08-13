@@ -1,0 +1,50 @@
+
+
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+/* Toggle this class when clicking on the popup container (hide and show the popup) */
+@keyframes opacityIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes opacityOut {
+    from {
+        opacity: 1;
+    }
+
+    to {
+        opacity: 0;
+    }
+}
+
+@keyframes popup_button_background {
+    from {
+        text-shadow: hsl(200, 100%, 0%) 1px 0 10px;
+        color: rgb(100, 100, 100);
+    }
+
+    to {
+        text-shadow: hsl(200, 100%, 100%) 1px 0 5px;
+        color: rgb(0, 0, 0);
+    }
+}
+
+
+
+
+

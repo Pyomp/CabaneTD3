@@ -1,0 +1,65 @@
+import { mergeBufferGeometries } from '../../../modules/BufferGeometryUtils.js'
+import { AdditiveBlending, DoubleSide, Mesh, MeshBasicMaterial, PlaneGeometry, Texture } from '../../../modules/three.module.js'
+
+
+let model
+let init_nb = 0
+export const init_wheel_3D = () => {
+    init_nb++
+    if (model) return model
+    /**
+     * @returns {HTMLCanvasElement}
+     */
+    function generateLaserBodyCanvas() {
+        // init canvas
+        var canvas = document.createElement('canvas')
+        var context = canvas.getContext('2d')
+        canvas.width = 1
+        canvas.height = 64
+        // set gradient
+        var gradient = context.createLinearGradient(0, 0, canvas.width, canvas.height)
+        gradient.addColorStop(0, 'rgba(  0,  0,  0,0.1)')
+        gradient.addColorStop(0.1, 'rgba(160,160,160,0.3)')
+        gradient.addColorStop(0.5, 'rgba(255,255,255,0.5)')
+        gradient.addColorStop(0.9, 'rgba(160,160,160,0.3)')
+        gradient.addColorStop(1.0, 'rgba(  0,  0,  0,0.1)')
+        // fill the rectangle
+        context.fillStyle = gradient
+        context.fillRect(0, 0, canvas.width, canvas.height)
+        // return the just built canvas 
+        return canvas
+    }
+
+    const texture = new Texture(generateLaserBodyCanvas())
+    texture.needsUpdate = true
+    const geos = []
+    const nPlanes = 6
+    for (let i = 0; i < nPlanes; i++) {
+        const geo = new PlaneGeometry(.4, 2)
+        geo.rotateX(i / nPlanes * Math.PI)
+        geos.push(geo)
+    }
+    const geometry = mergeBufferGeometries(geos)
+
+    model = new Mesh(geometry,
+        new MeshBasicMaterial({
+            map: texture,
+            blending: AdditiveBlending,
+            transparent: true,
+            color: 0x6666ff,
+            side: DoubleSide,
+            depthWrite: false
+        })
+    )
+    model.geometry.computeBoundingBox()
+    model.geometry.computeBoundingSphere()
+    return model
+}
+
+
+export const destroy_wheel_3D = () => {
+    init_nb--
+    if (init_nb === 0) {
+        model = undefined
+    }
+}
