@@ -36,7 +36,7 @@ export class Head {
         }, this.container, 'play')
 
         const on_click = () => {
-            open(`${location.origin}/game`, "_self")
+            open(new URL('../../game.html', import.meta.url).href, "_self")
         }
         button.addEventListener('click', on_click)
     }
