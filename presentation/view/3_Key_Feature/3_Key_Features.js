@@ -27,7 +27,7 @@ export class Key_Features {
             {
                 description: 'family_desc',
                 image: createHTMLElement('img', { border: 'solid 3px black', borderRadius: '5px', }, undefined, undefined, {
-                    src: new URL('./family.JPG', import.meta.url).href,
+                    src: new URL('./family.jpg', import.meta.url).href,
                 })
             },
             {
