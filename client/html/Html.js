@@ -8,7 +8,6 @@ import { Game } from '../../common/Game.js'
 import { isDev } from '../../env.js'
 import { Third_Controls } from '../3D/entities/player/Third_Controls.js'
 import { Three_Context } from '../3D/Three_Context.js'
-import { WS_Manager } from '../appAPI/WS_Manager.js'
 import { Info_Player_View } from './hud/Info_Player_View.js'
 import { Repeat_Speed_Button_View } from './hud/Repeat_Speed_Button_View.js'
 import { Wallet_View } from './hud/Wallet_View.js'
@@ -31,7 +30,6 @@ import { Static_Init_Manager } from '../../utils/Static_Init_Manager.js'
 import { Skill_Image } from '../ressources/skill_image/Skill_Image.js'
 import { Wave_Win_Lose_View } from './events/Wave_Win_Lose_View.js'
 import { Wave_Bar_View } from './events/Wave_Bar_View.js'
-import { Connection_View } from './hud/Connection_View.js'
 
 let skill_image, item_image
 const { init, destroy } = new Static_Init_Manager(
@@ -54,15 +52,13 @@ export class Html {
 
     /**
      * 
-     * @param {Three_Context} three_context 
-     * @param {Game} game 
-     * @param {WS_Manager} ws_manager 
-     * @param {Third_Controls} third_controls 
+     * @param {Three_Context} three_context
+     * @param {Game} game
+     * @param {Third_Controls} third_controls
      */
     constructor(
         three_context,
         game,
-        ws_manager,
 
         third_controls,
         htmlelement_effect,
@@ -124,7 +120,6 @@ export class Html {
         const settings_view = new Settings_View(
             canvas_picture_in_picture,
             game,
-            ws_manager,
             three_context,
 
             third_controls,
@@ -182,12 +177,6 @@ export class Html {
             position: 'fixed', top: '2px', right: '2px',
             display: 'flex', height: '20px',
         }, document.body)
-
-        // header_container_right.appendChild(connection_container)
-        new Connection_View(
-            header_container_right,
-            ws_manager.ws_client,
-        )
 
         new Wave_View(
             header_container_right,

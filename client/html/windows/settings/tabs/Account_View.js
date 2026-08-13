@@ -1,18 +1,12 @@
 
 import { Three_Context } from "../../../../3D/Three_Context.js"
-import { providers_info } from "../../../../appAPI/auth/Provider_Info.js"
-import { WS_C_Save_User_Data } from "../../../../appAPI/api/Save_User_Data.js"
-import { WS_Client } from "../../../../appAPI/WS_Client.js"
-import { Auth_Button_View } from "../../../models/Auth_Button_View.js"
 import { Canvas_Picture_In_Picture } from "../../../models/Canvas_Picture_In_Picture.js"
 import { Theme_View } from "../../../models/Theme_View.js"
 import { createHTMLElement } from "../../../utils/htmlElement.js"
-import { Async_Button } from "../../../models/Async_Button.js"
 import { User_Data } from '../../../../../common/user_data/User_Data.js'
 import { PWA } from '../../../utils/browser_info.js'
 import { PWA_Install_View } from '../../../models/PWA_Install_View.js'
 import { strHTMLsafe } from '../../../utils/htmlElement.js'
-import { Stay_Connected_View } from '../../../models/Stay_Connected_View.js'
 import { createSeparationBar } from '../../../utils/views/separationBar.js'
 import { fullScreenIMG, popupIMG } from '../../../utils/icons/icons.js'
 import { Select_Image_View } from '../../../utils/Select_Image_View.js'
@@ -22,25 +16,21 @@ import { LOCALSTORAGE_LANG } from '../../../../../constants/localStorage.js'
 export class Account_View {
 
     /**
-     * @param {Canvas_Picture_In_Picture} canvas_picture_in_picture 
-     * @param {User_Data} user_data 
-     * @param {WS_Client} ws_client 
+     * @param {Canvas_Picture_In_Picture} canvas_picture_in_picture
+     * @param {User_Data} user_data
      * @param {Three_Context} three_context
-     * @param {WS_C_Save_User_Data} save_user_data
      */
     constructor(
         canvas_picture_in_picture,
         user_data,
-        ws_client,
         three_context,
-        save_user_data,
     ) {
         this.container = createHTMLElement('div', {
             padding: '5px',
         })
 
 
-        
+
         if (PWA === false) {
             new PWA_Install_View(this.container)
         }
@@ -64,25 +54,7 @@ export class Account_View {
             .addEventListener('click', () => { location.reload() })
         //
 
-        new Stay_Connected_View(this.container)
-
-        new Auth_Button_View(this.container, user_data, providers_info.twitch, ws_client)
-        new Auth_Button_View(this.container, user_data, providers_info.discord, ws_client)
-        new Auth_Button_View(this.container, user_data, providers_info.google, ws_client)
-
         createSeparationBar(this.container)
-        const logout = createHTMLElement('button', {
-            backgroundColor: 'red', width: 'calc(100% - 60px)',
-            marginLeft: '30px',
-            padding: '7px',
-            '--padding-button': '2px',
-        }, this.container, 'log_out')
-
-        logout.addEventListener('click', ws_client.close)
-
-        ws_client.on_state.add(() => {
-            logout.display = (ws_client.state === WS_Client.OPEN) ? 'initial' : 'none'
-        })
 
         const befor_last_line = createHTMLElement('div', {
             display: 'flex', alignItems: 'center', marginTop: '2px'
@@ -141,41 +113,6 @@ export class Account_View {
                     () => { change_lang('fr') },
                 ]
             )
-        }
-
-        {
-            const button = new Async_Button('Save', {
-                width: 'fit-content',
-                backgroundColor: 'hsl(120, 40%, 50%)',
-                padding: '10px',
-                marginLeft: 'auto'
-            }, footer)
-            button.container.addEventListener('click', async () => {
-                button.container.disabled = true
-                button.display_progress()
-
-                const res = await save_user_data.save()
-                if (res === true) button.display_ok()
-                else button.display_nok()
-
-                button.container.disabled = false
-            })
-        } {
-            const button = new Async_Button('Load', {
-                width: 'fit-content',
-                backgroundColor: 'hsl(240, 40%, 60%)',
-                padding: '10px',
-            }, footer)
-            button.container.addEventListener('click', async () => {
-                button.container.disabled = true
-                button.display_progress()
-
-                const res = await save_user_data.load()
-                if (res === true) button.display_ok()
-                else button.display_nok()
-
-                button.container.disabled = false
-            })
         }
     }
 }

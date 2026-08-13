@@ -7,31 +7,26 @@ import { DefaultHTMLWindow } from '../../utils/views/DefaultWindow.js'
 import { Canvas_Picture_In_Picture } from '../../models/Canvas_Picture_In_Picture.js'
 import { Game } from '../../../../common/Game.js'
 import { Three_Context } from '../../../3D/Three_Context.js'
-import { WS_C_Save_User_Data } from '../../../appAPI/api/Save_User_Data.js'
-import { Third_Controls } from '../../../3D/entities/player/Third_Controls.js' 
+import { Third_Controls } from '../../../3D/entities/player/Third_Controls.js'
 import { Scene_Shaker } from '../../../3D/utils/Scene_Shaker.js'
 import { HTMLElement_Effect } from '../../utils/HTMLElement_Effect.js'
 import { Input_Manager } from '../../../management/Input_Manager.js'
-import { WS_Manager } from '../../../appAPI/WS_Manager.js'
 import { Game_Settings_View } from './tabs/Game_Settings_View.js'
 
 export class Settings_View {
 
     /**
-     * @param {Canvas_Picture_In_Picture} canvas_picture_in_picture 
-     * @param {Game} game 
-     * @param {WS_Manager} ws_manager 
+     * @param {Canvas_Picture_In_Picture} canvas_picture_in_picture
+     * @param {Game} game
      * @param {Three_Context} three_context
-     * @param {WS_C_Save_User_Data} ws_c_save_user_data
-     * @param {Third_Controls} third_controls 
-     * @param {HTMLElement_Effect} htmlelement_effect 
-     * @param {Scene_Shaker} scene_shaker 
-     * @param {Input_Manager} input_manager 
+     * @param {Third_Controls} third_controls
+     * @param {HTMLElement_Effect} htmlelement_effect
+     * @param {Scene_Shaker} scene_shaker
+     * @param {Input_Manager} input_manager
      */
     constructor(
         canvas_picture_in_picture,
         game,
-        ws_manager,
         three_context,
 
         third_controls,
@@ -51,9 +46,7 @@ export class Settings_View {
         const account_view = new Account_View(
             canvas_picture_in_picture,
             game.user_data,
-            ws_manager.ws_client,
             three_context,
-            ws_manager.save_user_data,
         )
 
         const game_settings_view = new Game_Settings_View(

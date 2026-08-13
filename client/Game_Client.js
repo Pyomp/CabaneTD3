@@ -7,7 +7,6 @@
 
 import { Game } from '../common/Game.js'
 import { Gui_3D } from './3D/Gui_3D.js'
-import { WS_Manager } from './appAPI/WS_Manager.js'
 import { Html } from './html/Html.js'
 import { User_Data_Storage } from './management/User_Data_Storage.js'
 import { Input_Manager } from './management/Input_Manager.js'
@@ -44,10 +43,6 @@ export class Game_Client {
 
         const game = new Game()
 
-        const ws_manager = new WS_Manager(
-            game.user_data
-        )
-
         const gui_3D = new Gui_3D(
             document.body,
             game,
@@ -61,7 +56,6 @@ export class Game_Client {
         const html = new Html(
             gui_3D.three_context,
             game,
-            ws_manager,
             gui_3D.third_controls,
             gui_3D.htmlelement_effect,
             gui_3D.scene_shaker,
