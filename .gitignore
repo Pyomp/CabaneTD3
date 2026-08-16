@@ -11,8 +11,10 @@ buildPerf
 AGENTS.md
 CLAUDE.md
 *.db
-
-**.blend1
+.playwright-mcp
+*.Identifier
+*.wasm
+*.blend1
 
 # syncthing
 .stfolder
